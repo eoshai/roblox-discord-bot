@@ -43,7 +43,7 @@ git push -u origin main
 ### Primeira Vez (Setup):
 ```bash
 # 1. Clonar o repositório
-git clone https://github.com/SEU_USUARIO/NOME_REPO.git
+git clone https://github.com/eoshai/roblox-discord-bot.git
 cd NOME_REPO
 
 # 2. Setup automático (instala dependências e cria .env)
@@ -106,7 +106,7 @@ sudo apt-get install -y nodejs
 sudo npm install -g pm2
 
 # 4. Clonar projeto
-git clone https://github.com/SEU_USUARIO/NOME_REPO.git
+git clone https://github.com/eoshai/roblox-discord-bot.git
 cd NOME_REPO
 
 # 5. Instalar dependências
@@ -267,6 +267,6 @@ pm2 logs roblox-bot
 
 ## 🆘 Suporte
 
-- 🐛 **Issues**: [GitHub Issues](https://github.com/SEU_USUARIO/NOME_REPO/issues)
+- 🐛 **Issues**: [GitHub Issues](https://github.com/eoshai/roblox-discord-bot/issues)
 - 💬 **Discord**: `shaiflm`
 - 📧 **Email**: seu-email@exemplo.com

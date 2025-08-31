@@ -24,6 +24,16 @@ const CONFIG = {
     NODE_ENV: process.env.NODE_ENV || 'development'
 };
 
+async function getHeadshotUrl(userId) {
+    const response = await fetch(`https://thumbnails.roproxy.com/v1/users/avatar-headshot?userIds=${userId}&size=420x420&format=Png&isCircular=false`);
+    const data = await response.json();
+    if (data.data && data.data[0] && data.data[0].imageUrl) {
+        return data.data[0].imageUrl;
+    }
+    return null; // fallback caso algo dê errado
+}
+
+
 // Validar configurações obrigatórias
 function validateConfig() {
     const required = ['DISCORD_TOKEN', 'ROBLOX_COOKIE', 'GROUP_ID', 'CHANNEL_ID'];
@@ -294,11 +304,11 @@ class RobloxGroupBot {
         
         switch (requiredLevel) {
             case 1:
-                return "❌ Você precisa do cargo **Info Viewer** ou superior para usar este comando.";
+                return "❌ Você precisa ser um **Praça** ou superior para usar este comando.";
             case 2:
-                return "❌ Você precisa do cargo **Exile & Accept** ou superior para usar este comando.";
+                return "❌ Você precisa ser um **Graduado** ou superior para usar este comando.";
             case 3:
-                return "❌ Você precisa do cargo **Admin Completo** para usar este comando.";
+                return "❌ Você precisa ser um **Oficial** para usar este comando.";
             default:
                 return messages.errors.no_permission;
         }
@@ -471,10 +481,10 @@ async function handleInfoCommand(interaction, bot) {
     }
 
     const groupInfo = await bot.getUserInGroup(userInfo.userId);
-    
+    const headshotUrl = await getHeadshotUrl(userInfo.userId);
     const embed = new Discord.EmbedBuilder()
         .setTitle(messages.info.user_info_title.replace('{username}', userInfo.username))
-        .setThumbnail(`https://www.roblox.com/headshot-thumbnail/image?userId=${userInfo.userId}&width=420&height=420&format=png`)
+        .setThumbnail(headshotUrl || 'https://st.depositphotos.com/2074779/2629/i/950/depositphotos_26292095-stock-photo-question-mark.jpg')
         .setColor(messages.embeds.colors.info)
         .addFields([
             { name: 'ID', value: `${userInfo.userId}`, inline: true },

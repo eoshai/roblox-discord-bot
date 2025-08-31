@@ -20,8 +20,8 @@
   "author": "joaozzz_z",
   "license": "MIT",
   "dependencies": {
-    "discord.js": "^14.14.1",
-    "noblox.js": "^4.15.4",
+    "discord.js": "^14.22.1",
+    "noblox.js": "^4.14.0",
     "dotenv": "^16.3.1"
   },
   "devDependencies": {
@@ -32,10 +32,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/seu-usuario/roblox-discord-bot.git"
+    "url": "https://github.com/eoshai/roblox-discord-bot.git"
   },
   "bugs": {
-    "url": "https://github.com/seu-usuario/roblox-discord-bot/issues"
+    "url": "https://github.com/eoshai/roblox-discord-bot/issues"
   },
-  "homepage": "https://github.com/seu-usuario/roblox-discord-bot#readme"
+  "homepage": "https://github.com/eoshai/roblox-discord-bot#readme"
 }
