@@ -1,0 +1,166 @@
+{
+  "commands": [
+    {
+      "name": "status",
+      "description": "Verificar status do grupo",
+      "category": "info",
+      "adminOnly": false
+    },
+    {
+      "name": "members", 
+      "description": "Contar membros do grupo",
+      "category": "info",
+      "adminOnly": false
+    },
+    {
+      "name": "promover",
+      "description": "Promover um membro do grupo",
+      "category": "admin", 
+      "adminOnly": true,
+      "options": [
+        {
+          "name": "usuario",
+          "description": "Nome do usuário no Roblox",
+          "type": 3,
+          "required": true
+        },
+        {
+          "name": "cargo",
+          "description": "Novo cargo (número do rank)",
+          "type": 4,
+          "required": true,
+          "min_value": 1,
+          "max_value": 255
+        }
+      ]
+    },
+    {
+      "name": "rebaixar",
+      "description": "Rebaixar um membro do grupo", 
+      "category": "admin",
+      "adminOnly": true,
+      "options": [
+        {
+          "name": "usuario",
+          "description": "Nome do usuário no Roblox",
+          "type": 3,
+          "required": true
+        },
+        {
+          "name": "cargo", 
+          "description": "Novo cargo (número do rank)",
+          "type": 4,
+          "required": true,
+          "min_value": 1,
+          "max_value": 255
+        }
+      ]
+    },
+    {
+      "name": "exilar",
+      "description": "Exilar um membro do grupo",
+      "category": "admin",
+      "adminOnly": true, 
+      "options": [
+        {
+          "name": "usuario",
+          "description": "Nome do usuário no Roblox",
+          "type": 3,
+          "required": true
+        },
+        {
+          "name": "motivo",
+          "description": "Motivo do exílio (opcional)",
+          "type": 3,
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "info",
+      "description": "Informações sobre um membro do grupo",
+      "category": "info",
+      "adminOnly": false,
+      "options": [
+        {
+          "name": "usuario",
+          "description": "Nome do usuário no Roblox", 
+          "type": 3,
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "cargos",
+      "description": "Listar todos os cargos do grupo",
+      "category": "info", 
+      "adminOnly": false
+    },
+    {
+      "name": "aceitar",
+      "description": "Aceitar pedido de entrada no grupo",
+      "category": "admin",
+      "adminOnly": true,
+      "options": [
+        {
+          "name": "usuario",
+          "description": "Nome do usuário no Roblox",
+          "type": 3,
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "rejeitar", 
+      "description": "Rejeitar pedido de entrada no grupo",
+      "category": "admin",
+      "adminOnly": true,
+      "options": [
+        {
+          "name": "usuario",
+          "description": "Nome do usuário no Roblox",
+          "type": 3,
+          "required": true
+        },
+        {
+          "name": "motivo",
+          "description": "Motivo da rejeição (opcional)",
+          "type": 3,
+          "required": false
+        }
+      ]
+    }
+  ],
+  "categories": {
+    "info": {
+      "name": "Informações",
+      "emoji": "📊",
+      "color": "#0099ff"
+    },
+    "admin": {
+      "name": "Administração", 
+      "emoji": "⚡",
+      "color": "#ff6600"
+    }
+  },
+  "embeds": {
+    "colors": {
+      "success": "#00ff00",
+      "warning": "#ff6600", 
+      "error": "#ff0000",
+      "info": "#0099ff",
+      "raid_alert": "#ff0000"
+    },
+    "emojis": {
+      "promotion": "📈",
+      "demotion": "📉", 
+      "exile": "🔨",
+      "new_member": "🆕",
+      "member_left": "🚪",
+      "raid_alert": "🚨",
+      "success": "✅",
+      "error": "❌",
+      "warning": "⚠️"
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "name": "roblox-discord-bot",
+  "version": "1.0.0",
+  "description": "Bot Discord para gerenciar grupo Roblox com integração completa",
+  "main": "start.js",
+  "scripts": {
+    "start": "node start.js",
+    "dev": "nodemon start.js",
+    "setup": "npm install && cp .env.example .env && echo '✅ Setup concluído! Edite o arquivo .env com suas credenciais.'",
+    "test": "node -c index.js && echo '✅ Sintaxe do código verificada!'",
+    "validate": "node -e \"require('dotenv').config(); console.log('✅ Arquivo .env carregado com sucesso!')\""
+  },
+  "keywords": [
+    "discord",
+    "roblox", 
+    "bot",
+    "group management",
+    "automation"
+  ],
+  "author": "joaozzz_z",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^14.14.1",
+    "noblox.js": "^4.15.4",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  },
+  "engines": {
+    "node": ">=16.9.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/seu-usuario/roblox-discord-bot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/seu-usuario/roblox-discord-bot/issues"
+  },
+  "homepage": "https://github.com/seu-usuario/roblox-discord-bot#readme"
+}

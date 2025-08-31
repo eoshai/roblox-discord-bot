@@ -1,0 +1,69 @@
+{
+  "errors": {
+    "no_permission": "❌ Você não tem permissão para usar este comando.",
+    "no_permission_exile_accept": "❌ Você precisa do cargo específico para usar comandos de exílio/aceitar.",
+    "no_permission_info": "❌ Você precisa do cargo específico para ver informações do grupo.",
+    "no_permission_full_admin": "❌ Apenas administradores completos podem usar este comando.",
+    "user_not_found": "❌ Usuário não encontrado no Roblox.",
+    "not_group_member": "❌ Usuário não é membro do grupo.",
+    "invalid_rank_promotion": "❌ O novo cargo deve ser maior que o atual.",
+    "invalid_rank_demotion": "❌ O novo cargo deve ser menor que o atual.",
+    "group_info_error": "❌ Erro ao buscar informações do grupo.",
+    "member_count_error": "❌ Erro ao contar membros do grupo.", 
+    "roles_error": "❌ Erro ao buscar cargos do grupo.",
+    "user_info_error": "❌ Erro ao buscar informações do usuário.",
+    "command_execution_error": "❌ Erro ao executar o comando. Verifique as permissões do bot.",
+    "roblox_api_error": "❌ Erro na API do Roblox. Tente novamente em alguns minutos.",
+    "already_member": "❌ Usuário já é membro do grupo.",
+    "no_join_request": "❌ Usuário não possui pedido de entrada pendente."
+  },
+  "success": {
+    "promotion": "✅ **{username}** foi promovido para **Rank {rank}**!",
+    "demotion": "✅ **{username}** foi rebaixado para **Rank {rank}**!",
+    "exile": "🔨 **{username}** foi exilado do grupo!",
+    "accept_request": "✅ Pedido de **{username}** foi aceito!",
+    "reject_request": "❌ Pedido de **{username}** foi rejeitado!"
+  },
+  "info": {
+    "monitoring_status": "🟢 Monitorando",
+    "group_status_title": "📊 Status - {groupName}",
+    "member_count": "👥 **{groupName}** possui **{count}** membros.",
+    "roles_title": "📋 Cargos do Grupo",
+    "user_info_title": "👤 {username}",
+    "not_member_status": "❌ Não é membro",
+    "member_status": "**Rank {rank}** - {role}",
+    "created_date": "Criado em",
+    "biography": "Biografia"
+  },
+  "audit_log": {
+    "new_member_title": "🆕 Novo Membro Aceito",
+    "promotion_title": "📈 Promoção",
+    "demotion_title": "📉 Rebaixamento", 
+    "member_removal_title": "🚪 Membro Removido",
+    "exile_title": "🔨 Exílio Realizado",
+    "rank_change_title": "📈 Mudança de Cargo",
+    "raid_alert_title": "🚨 ATIVIDADE SUSPEITA DETECTADA",
+    "raid_alert_description": "Muitas ações foram realizadas em pouco tempo. Possível raid em andamento!",
+    "raid_recommendation": "Verifique o grupo imediatamente!",
+    "recent_actions": "Ações Recentes",
+    "user_field": "Usuário",
+    "accepted_by": "Aceito por",
+    "promoted_by": "Promovido por",
+    "demoted_by": "Rebaixado por", 
+    "removed_by": "Removido por",
+    "exiled_by": "Exilado por",
+    "changed_by": "Alterado por",
+    "timestamp": "Horário",
+    "reason": "Motivo",
+    "old_rank": "Cargo Anterior",
+    "new_rank": "Novo Cargo",
+    "target_name": "Nome do Alvo"
+  },
+  "help": {
+    "title": "🤖 Comandos Disponíveis",
+    "description": "Lista de todos os comandos do bot:",
+    "info_category": "📊 **Informações**",
+    "admin_category": "⚡ **Administração** (Apenas Staff)",
+    "footer": "Use /comando para executar"
+  }
+}
