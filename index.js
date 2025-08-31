@@ -4,11 +4,9 @@ const fs = require('fs');
 const path = require('path');
 require('dotenv').config();
 
-// Carregar configurações
 const commands = require('./config/commands.json');
 const messages = require('./config/messages.json');
 
-// Configurações do ambiente
 const CONFIG = {
     DISCORD_TOKEN: process.env.DISCORD_TOKEN,
     DISCORD_CLIENT_ID: process.env.DISCORD_CLIENT_ID,
@@ -30,11 +28,9 @@ async function getHeadshotUrl(userId) {
     if (data.data && data.data[0] && data.data[0].imageUrl) {
         return data.data[0].imageUrl;
     }
-    return null; // fallback caso algo dê errado
+    return null; // fallback
 }
 
-
-// Validar configurações obrigatórias
 function validateConfig() {
     const required = ['DISCORD_TOKEN', 'ROBLOX_COOKIE', 'GROUP_ID', 'CHANNEL_ID'];
     const roleRequired = ['ROLE_FULL_ADMIN', 'ROLE_EXILE_ACCEPT', 'ROLE_INFO_VIEWER'];
@@ -76,11 +72,11 @@ class RobloxGroupBot {
         try {
             validateConfig();
             
-            // Login no Roblox
+            // login roblox
             await noblox.setCookie(CONFIG.ROBLOX_COOKIE);
             console.log('✅ Logado no Roblox!');
             
-            // Login no Discord
+            // login discord
             await client.login(CONFIG.DISCORD_TOKEN);
             console.log('✅ Bot Discord conectado!');
             
@@ -95,7 +91,7 @@ class RobloxGroupBot {
         if (this.isMonitoring) return;
         this.isMonitoring = true;
 
-        // Monitorar logs de auditoria em tempo real
+        // monitoramento
         noblox.onAuditLog(CONFIG.GROUP_ID).on('data', (auditData) => {
             this.handleAuditLogEvent(auditData);
         });
@@ -107,23 +103,23 @@ class RobloxGroupBot {
         const channel = client.channels.cache.get(CONFIG.CHANNEL_ID);
         if (!channel) return;
 
-        // Registrar ação recente para detecção anti-raid
+        // registro de ação
         this.recentActions.push({
             timestamp: Date.now(),
             action: data.actionType,
             actor: data.actor
         });
 
-        // Limpar ações antigas
+        // limpar ação antiga
         this.cleanOldActions();
 
-        // Verificar se é possível raid
+        // verificar se é raid
         if (this.detectSuspiciousActivity()) {
             await this.handleSuspiciousActivity(channel);
             return;
         }
 
-        // Processar diferentes tipos de ações
+        // diferentes ações
         switch (data.actionType) {
             case 'Accept Join Request':
                 await this.handleNewMember(data, channel);
@@ -225,7 +221,7 @@ class RobloxGroupBot {
         );
     }
 
-    // Comandos slash do arquivo JSON
+    // slashs
     async setupSlashCommands() {
         try {
             const rest = new Discord.REST({ version: '10' }).setToken(CONFIG.DISCORD_TOKEN);
@@ -239,36 +235,36 @@ class RobloxGroupBot {
         }
     }
 
-    // Sistema de permissões hierárquico cumulativo
+    // cargos e perms
     hasPermission(interaction, commandName) {
         const memberRoleIds = interaction.member.roles.cache.map(role => role.id);
         
-        // Definir hierarquia de permissões (do maior para o menor)
+        // hierarquias
         const hasFullAdmin = memberRoleIds.includes(CONFIG.ROLE_FULL_ADMIN);
         const hasExileAccept = memberRoleIds.includes(CONFIG.ROLE_EXILE_ACCEPT);
         const hasInfoViewer = memberRoleIds.includes(CONFIG.ROLE_INFO_VIEWER);
         
-        // Determinar nível de permissão do usuário
-        let userLevel = 0; // Público
-        if (hasInfoViewer) userLevel = 1; // Info Viewer
-        if (hasExileAccept) userLevel = 2; // Exile & Accept (herda Info Viewer)
-        if (hasFullAdmin) userLevel = 3;   // Admin Completo (herda tudo)
+        // nivel de perm
+        let userLevel = 0; // publico
+        if (hasInfoViewer) userLevel = 1; // praça
+        if (hasExileAccept) userLevel = 2; // graduado (herda Info Viewer)
+        if (hasFullAdmin) userLevel = 3;   // oficial (herda tudo)
         
-        // Definir comandos por nível
+        // por nivel
         const commandLevels = {
-            // Nível 0 - Público
+            // publico
             'status': 0,
             
-            // Nível 1 - Info Viewer
+            // praça
             'info': 1,
             'cargos': 1, 
             'members': 1,
             
-            // Nível 2 - Exile & Accept (+ anteriores)
+            // graduado
             'aceitar': 2,
             'rejeitar': 2,
             
-            // Nível 3 - Admin Completo (+ anteriores)
+            // oficial
             'promover': 3,
             'rebaixar': 3,
             'exilar': 3
@@ -277,7 +273,7 @@ class RobloxGroupBot {
         const requiredLevel = commandLevels[commandName] || 999;
         const hasAccess = userLevel >= requiredLevel;
         
-        // Retornar resultado detalhado
+        // resultado
         return { 
             hasPermission: hasAccess,
             userLevel: userLevel,
@@ -287,7 +283,7 @@ class RobloxGroupBot {
         };
     }
     
-    // Obter nome do nível de permissão
+    // nivel de perm
     getLevelName(level) {
         const levelNames = {
             0: 'public',
@@ -298,7 +294,7 @@ class RobloxGroupBot {
         return levelNames[level] || 'unknown';
     }
 
-    // Obter mensagem de erro baseada no nível necessário
+    // error messages
     getPermissionErrorMessage(permissionResult) {
         const requiredLevel = permissionResult.requiredLevel;
         
@@ -314,7 +310,7 @@ class RobloxGroupBot {
         }
     }
 
-    // Buscar usuário do Roblox
+    // user do roblox
     async findRobloxUser(username) {
         try {
             const userId = await noblox.getIdFromUsername(username);
@@ -328,7 +324,7 @@ class RobloxGroupBot {
         }
     }
 
-    // Verificar membro no grupo
+    // membro do grupo
     async getUserInGroup(userId) {
         try {
             const rank = await noblox.getRankInGroup(CONFIG.GROUP_ID, userId);
@@ -342,7 +338,7 @@ class RobloxGroupBot {
         }
     }
 
-    // Formatar mensagem com placeholders
+    // placeholders
     formatMessage(template, data) {
         let message = template;
         Object.keys(data).forEach(key => {
@@ -352,7 +348,7 @@ class RobloxGroupBot {
     }
 }
 
-// Inicializar bot
+// iniciar bot
 client.on('ready', async () => {
     console.log(`🤖 ${client.user.tag} está online!`);
     const bot = new RobloxGroupBot();
@@ -361,7 +357,7 @@ client.on('ready', async () => {
     await bot.setupSlashCommands();
 });
 
-// Lidar com comandos slash
+// comandos slash
 client.on('interactionCreate', async interaction => {
     if (!interaction.isChatInputCommand()) return;
 
@@ -370,7 +366,7 @@ client.on('interactionCreate', async interaction => {
     
     if (!commandData) return;
 
-    // Verificar permissões para comandos administrativos
+    // verificar perms
     if (commandData.adminOnly) {
         const permissionResult = bot.hasPermission(interaction, interaction.commandName);
         
@@ -385,7 +381,7 @@ client.on('interactionCreate', async interaction => {
     }
 
     try {
-        // Processar comandos
+        // comandos
         switch (interaction.commandName) {
             case 'status':
                 await handleStatusCommand(interaction);
@@ -430,7 +426,7 @@ client.on('interactionCreate', async interaction => {
     }
 });
 
-// Funções dos comandos
+// funções dos comandos
 async function handleStatusCommand(interaction) {
     const groupInfo = await noblox.getGroup(CONFIG.GROUP_ID);
     const embed = new Discord.EmbedBuilder()
@@ -614,7 +610,7 @@ async function handleExileCommand(interaction, bot) {
 
     await interaction.editReply({ embeds: [embed] });
     
-    // Log no canal principal
+    // log no canal principal
     const logChannel = client.channels.cache.get(CONFIG.LOG_CHANNEL_ID || CONFIG.CHANNEL_ID);
     if (logChannel) {
         await logChannel.send({ embeds: [embed] });
@@ -632,7 +628,7 @@ async function handleAcceptCommand(interaction, bot) {
         return;
     }
 
-    // Verificar se já é membro
+    // verify ja e membro
     const groupInfo = await bot.getUserInGroup(userInfo.userId);
     if (groupInfo) {
         await interaction.editReply(messages.errors.already_member);
@@ -640,7 +636,7 @@ async function handleAcceptCommand(interaction, bot) {
     }
 
     try {
-        // Aceitar pedido de entrada
+        // aceitar pdd de entrada
         await noblox.handleJoinRequest(CONFIG.GROUP_ID, userInfo.userId, true);
         
         const successMessage = messages.success.accept_request.replace('{username}', userInfo.username);
@@ -668,13 +664,13 @@ async function handleRejectCommand(interaction, bot) {
     }
 
     try {
-        // Rejeitar pedido de entrada
+        // recuse pdd
         await noblox.handleJoinRequest(CONFIG.GROUP_ID, userInfo.userId, false);
         
         const successMessage = messages.success.reject_request.replace('{username}', userInfo.username);
         await interaction.editReply(successMessage);
         
-        // Log da rejeição
+        // log pdd
         const logChannel = client.channels.cache.get(CONFIG.LOG_CHANNEL_ID || CONFIG.CHANNEL_ID);
         if (logChannel) {
             const embed = new Discord.EmbedBuilder()
@@ -699,7 +695,6 @@ async function handleRejectCommand(interaction, bot) {
     }
 }
 
-// Tratamento de erros
 process.on('unhandledRejection', (error) => {
     console.error('❌ Erro não tratado:', error);
 });
@@ -713,7 +708,7 @@ client.on('error', (error) => {
     console.error('❌ Erro do Discord:', error);
 });
 
-// Graceful shutdown
+// graceful shutdown
 process.on('SIGINT', () => {
     console.log('🛑 Encerrando bot...');
     client.destroy();

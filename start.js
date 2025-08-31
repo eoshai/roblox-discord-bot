@@ -3,7 +3,7 @@ const path = require('path');
 
 console.log('🚀 Iniciando Roblox Discord Bot...\n');
 
-// Verificar se o arquivo .env existe
+// .env existe
 if (!fs.existsSync('.env')) {
     console.error('❌ Arquivo .env não encontrado!');
     console.log('📝 Copie o arquivo .env.example para .env e configure suas credenciais:');
@@ -12,7 +12,7 @@ if (!fs.existsSync('.env')) {
     process.exit(1);
 }
 
-// Verificar se as pastas necessárias existem
+// pastas existem
 const requiredDirs = ['config'];
 requiredDirs.forEach(dir => {
     if (!fs.existsSync(dir)) {
@@ -21,7 +21,7 @@ requiredDirs.forEach(dir => {
     }
 });
 
-// Verificar se os arquivos de configuração existem
+// arquivos config existem
 const configFiles = ['config/commands.json', 'config/messages.json'];
 configFiles.forEach(file => {
     if (!fs.existsSync(file)) {
@@ -34,5 +34,5 @@ configFiles.forEach(file => {
 console.log('✅ Verificações iniciais concluídas!');
 console.log('🤖 Carregando bot principal...\n');
 
-// Iniciar o bot principal
+// bot
 require('./index.js');

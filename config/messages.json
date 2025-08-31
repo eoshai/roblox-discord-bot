@@ -1,9 +1,9 @@
 {
   "errors": {
     "no_permission": "❌ Você não tem permissão para usar este comando.",
-    "no_permission_exile_accept": "❌ Você precisa do cargo específico para usar comandos de exílio/aceitar.",
+    "no_permission_exile_accept": "❌ Você não tem permissão para usar comandos de exílio/aceitar.",
     "no_permission_info": "❌ Você precisa do cargo específico para ver informações do grupo.",
-    "no_permission_full_admin": "❌ Apenas administradores completos podem usar este comando.",
+    "no_permission_full_admin": "❌ Você precisa ser um administrador para usar este comando.",
     "user_not_found": "❌ Usuário não encontrado no Roblox.",
     "not_group_member": "❌ Usuário não é membro do grupo.",
     "invalid_rank_promotion": "❌ O novo cargo deve ser maior que o atual.",
@@ -18,9 +18,9 @@
     "no_join_request": "❌ Usuário não possui pedido de entrada pendente."
   },
   "success": {
-    "promotion": "✅ **{username}** foi promovido para **Rank {rank}**!",
-    "demotion": "✅ **{username}** foi rebaixado para **Rank {rank}**!",
-    "exile": "🔨 **{username}** foi exilado do grupo!",
+    "promotion": "✅ **{username}** foi promovido para a patente**{rank}**!",
+    "demotion": "✅ **{username}** foi rebaixado para a patente**{rank}**!",
+    "exile": "🔨 **{username}** foi exilado do exército!",
     "accept_request": "✅ Pedido de **{username}** foi aceito!",
     "reject_request": "❌ Pedido de **{username}** foi rejeitado!"
   },
@@ -44,13 +44,13 @@
     "rank_change_title": "📈 Mudança de Cargo",
     "raid_alert_title": "🚨 ATIVIDADE SUSPEITA DETECTADA",
     "raid_alert_description": "Muitas ações foram realizadas em pouco tempo. Possível raid em andamento!",
-    "raid_recommendation": "Verifique o grupo imediatamente!",
+    "raid_recommendation": "Verifique o grupo de imeadiato!",
     "recent_actions": "Ações Recentes",
     "user_field": "Usuário",
     "accepted_by": "Aceito por",
     "promoted_by": "Promovido por",
     "demoted_by": "Rebaixado por", 
-    "removed_by": "Removido por",
+    "removed_by": "Expulso por",
     "exiled_by": "Exilado por",
     "changed_by": "Alterado por",
     "timestamp": "Horário",
